@@ -18,7 +18,9 @@ class PosterAndOverviewStack extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Image.network(poster),
+        Image.network(
+          '${MovieDetailsUiConstants.imageBaseUrl}$poster',
+        ),
         const Positioned(
           top: MovieDetailsUiConstants.favButtonColumTopPosition,
           right: MovieDetailsUiConstants.favButtonColumnRightPosition,

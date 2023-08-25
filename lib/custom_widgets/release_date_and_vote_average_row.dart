@@ -8,10 +8,12 @@ class ReleaseDateAndVoteAverageRow extends StatelessWidget {
     super.key,
     required this.releaseDate,
     required this.voteAverage,
+    required this.voteCount,
   });
 
   final String releaseDate;
   final String voteAverage;
+  final num voteCount;
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +24,15 @@ class ReleaseDateAndVoteAverageRow extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Middle(
-              text:
-                  '${MovieDetailsUiConstants.releaseDateTextConstant} $releaseDate'),
-          Middle(text: voteAverage),
+            text:
+                '${MovieDetailsUiConstants.releaseDateTextConstant} $releaseDate',
+          ),
+          Middle(
+            text: voteAverage,
+          ),
+          Middle(
+            text: voteCount.toString(),
+          ),
         ],
       ),
     );
