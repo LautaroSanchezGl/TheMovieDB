@@ -16,11 +16,12 @@ class MovieBackdropAndTitleStack extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
+      alignment: Alignment.center,
       children: [
-        Image.network(backdrop),
-        Positioned(
-          bottom: MovieDetailsUiConstants.movieTitleBottomPosition,
-          right: MovieDetailsUiConstants.movieTitleRightPosition,
+        Image.network(
+          '${MovieDetailsUiConstants.imageBaseUrl}$backdrop',
+        ),
+        Center(
           child: TitleWidget(
             movieTitle: originalTitle,
           ),

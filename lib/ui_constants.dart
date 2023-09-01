@@ -15,4 +15,5 @@ abstract class MovieDetailsUiConstants {
   static const double overviewPadding = 150.0;
   static const double borderRadius = 30;
   static const String releaseDateTextConstant = 'Available on';
+  static const String imageBaseUrl = 'https://image.tmdb.org/t/p/w500/';
 }
