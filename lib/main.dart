@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'views/movie_list_view.dart';
+import 'presentation/view/movie_list_view.dart';
 
-import 'entities/movie.dart';
+import 'domain/entity/movie.dart';
 
 void main() {
   runApp(MyApp());

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../entities/movie.dart';
-import '../text_styles/custom_text_style.dart';
-import '../ui_constants.dart';
-import '../views/movie_details_view.dart';
+import '../../domain/entity/movie.dart';
+import '../../core/util/text_styles/custom_text_style.dart';
+import '../../core/util/constants/ui_constants.dart';
+import '../view/movie_details_view.dart';
 
 class MovieInfo extends StatelessWidget {
   const MovieInfo({

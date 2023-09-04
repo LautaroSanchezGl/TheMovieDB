@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../ui_constants.dart';
+import '../../core/util/constants/ui_constants.dart';
 import 'middle_text.dart';
 
 class ReleaseDateAndVoteAverageRow extends StatelessWidget {

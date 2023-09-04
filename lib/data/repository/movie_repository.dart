@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
+import '../../domain/repository/movie_repository_interface.dart';
 
-import '../entities/movie.dart';
+import '../../domain/entity/movie.dart';
 
-class MovieRepository {
+class MovieRepositoryImp implements IMovieRepository {
+  @override
   Future<List<Movie>> getMovies() async {
     final String response =
         await rootBundle.loadString('assets/mock_data/movies.json');

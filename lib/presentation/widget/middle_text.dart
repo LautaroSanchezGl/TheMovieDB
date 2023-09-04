@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../text_styles/custom_text_style.dart';
+import '../../core/util/text_styles/custom_text_style.dart';
 
 class Middle extends StatelessWidget {
   const Middle({

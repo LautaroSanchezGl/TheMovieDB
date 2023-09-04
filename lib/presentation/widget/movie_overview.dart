@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../text_styles/custom_text_style.dart';
-import '../ui_constants.dart';
+import '../../core/util/text_styles/custom_text_style.dart';
+import '../../core/util/constants/ui_constants.dart';
 
 class MovieOverview extends StatelessWidget {
   const MovieOverview({
