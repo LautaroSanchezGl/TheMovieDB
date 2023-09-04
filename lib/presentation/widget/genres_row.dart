@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../entities/genre.dart';
-import '../repositories/genre_repository.dart';
+import '../../domain/entity/genre.dart';
+import '../../data/repository/genre_repository.dart';
+import '../../domain/repository/genre_repository_interface.dart';
 import 'row_genre_item.dart';
 
 class Genres extends StatefulWidget {
@@ -17,7 +18,7 @@ class Genres extends StatefulWidget {
 }
 
 class _GenresState extends State<Genres> {
-  final GenreRepository genreRepository = GenreRepository();
+  final IGenreRepository genreRepository = GenreRepositoryImp();
   late Future<List<Genre>> genres;
 
   @override

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../custom_widgets/movie_info.dart';
-import '../repositories/movie_repository.dart';
-import '../entities/movie.dart';
+import '../../domain/repository/movie_repository_interface.dart';
+import '../widget/movie_info.dart';
+import '../../data/repository/movie_repository.dart';
+import '../../domain/entity/movie.dart';
 
 class MovieListView extends StatefulWidget {
   const MovieListView({super.key});
@@ -12,7 +13,7 @@ class MovieListView extends StatefulWidget {
 }
 
 class _MovieListViewState extends State<MovieListView> {
-  final MovieRepository movieRepository = MovieRepository();
+  final IMovieRepository movieRepository = MovieRepositoryImp();
   late Future<List<Movie>> movies;
   static const double dividerHeight = 20;
   static const String errorMessage = 'An error has occurred while loading data';

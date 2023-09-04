@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../ui_constants.dart';
+import '../../core/util/constants/ui_constants.dart';
 
 class FavoriteButtonCounter extends StatefulWidget {
   const FavoriteButtonCounter({

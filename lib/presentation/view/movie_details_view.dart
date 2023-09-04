@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import '../custom_widgets/popularity_adult_and_original_language.dart';
+import '../widget/popularity_adult_and_original_language.dart';
 
-import '../custom_widgets/genres_row.dart';
-import '../custom_widgets/movie_backdrop_and_title_stack.dart';
-import '../custom_widgets/poster_and_overview_stack.dart';
-import '../custom_widgets/release_date_and_vote_average_row.dart';
-import '../entities/movie.dart';
-import '../ui_constants.dart';
+import '../widget/genres_row.dart';
+import '../widget/movie_backdrop_and_title_stack.dart';
+import '../widget/poster_and_overview_stack.dart';
+import '../widget/release_date_and_vote_average_row.dart';
+import '../../domain/entity/movie.dart';
+import '../../core/util/constants/ui_constants.dart';
 
 class MovieDetailsView extends StatelessWidget {
   const MovieDetailsView({

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../ui_constants.dart';
+import '../constants/ui_constants.dart';
 
 class CustomTextStyle {
   static const TextStyle overviewTextStyleBoldWhite = TextStyle(
