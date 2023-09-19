@@ -1,18 +1,14 @@
-import 'dart:convert';
-
-import 'package:flutter/services.dart';
-import '../../domain/repository/genre_repository_interface.dart';
 import '../../domain/entity/genre.dart';
+import '../../domain/repository/genre_repository_interface.dart';
+import '../datasource/remote/api_service.dart';
+import '../model/data_state.dart';
+import '../model/genre_model.dart';
 
 class GenreRepositoryImp implements IGenreRepository {
+  ApiService apiService = ApiService();
+
   @override
-  Future<List<Genre>> getGenreNamesById(List<num> ids) async {
-    final String response =
-        await rootBundle.loadString('assets/mock_data/genres.json');
-    List<dynamic> genres = json.decode(response)['genres'];
-    return genres
-        .where((genre) => ids.contains(genre['id']))
-        .map((gen) => Genre.fromJson(gen))
-        .toList();
+  Future<DataState<List<GenreModel>>> getMovieGenres(List<num> ids) {
+    return apiService.getGenreNamesById(ids);
   }
 }

@@ -1,35 +1,35 @@
 class Movie {
-  final num voteCount;
+  final int voteCount;
   final bool video;
-  final num popularity;
+  final double popularity;
   final String originalLanguage;
-  final num id;
+  final int id;
   final bool adult;
   final String title;
   final String originalTitle;
-  final List<num> genres;
+  final List<int> genres;
   final String posterPath;
   final String backdropPath;
   final String releaseDate;
-  final num voteAverage;
+  final double voteAverage;
   final String overview;
 
-  const Movie(
-    this.voteCount,
-    this.video,
-    this.popularity,
-    this.originalLanguage,
-    this.id,
-    this.adult,
-    this.title,
-    this.originalTitle,
-    this.genres,
-    this.posterPath,
-    this.backdropPath,
-    this.releaseDate,
-    this.voteAverage,
-    this.overview,
-  );
+  const Movie({
+    required this.voteCount,
+    required this.video,
+    required this.popularity,
+    required this.originalLanguage,
+    required this.id,
+    required this.adult,
+    required this.title,
+    required this.originalTitle,
+    required this.genres,
+    required this.posterPath,
+    required this.backdropPath,
+    required this.releaseDate,
+    required this.voteAverage,
+    required this.overview,
+  });
 
   Movie.fromJson(Map<String, dynamic> json)
       : voteCount = json['vote_count'],
@@ -49,26 +49,41 @@ class Movie {
 
   factory Movie.mockMovie() {
     return const Movie(
-      1,
-      false,
-      23,
-      'en',
-      1234,
-      false,
-      'The Super Mario Bros. Movie',
-      'The Super Mario Bros. Movie',
-      [
+      voteCount: 1,
+      video: false,
+      popularity: 23,
+      originalLanguage: 'en',
+      id: 1234,
+      adult: false,
+      title: 'The Super Mario Bros. Movie',
+      originalTitle: 'The Super Mario Bros. Movie',
+      genres: [
         18,
         24,
         16,
       ],
-      'https://image.tmdb.org/t/p/w500/qNBAXBIQlnOThrVvA6mA2B5ggV6.jpg',
-      'https://image.tmdb.org/t/p/w500/9n2tJBplPbgR2ca05hS5CKXwP2c.jpg',
-      '2023-04-05',
-      7.8,
-      'While working underground to fix a water main, Brooklyn plumbers—and brothers—Mario and Luigi '
+      posterPath:
+          'https://image.tmdb.org/t/p/w500/qNBAXBIQlnOThrVvA6mA2B5ggV6.jpg',
+      backdropPath:
+          'https://image.tmdb.org/t/p/w500/9n2tJBplPbgR2ca05hS5CKXwP2c.jpg',
+      releaseDate: '2023-04-05',
+      voteAverage: 7.8,
+      overview:
+          'While working underground to fix a water main, Brooklyn plumbers—and brothers—Mario and Luigi '
           'are transported down a mysterious pipe and wander into a magical new world. But when the '
           'brothers are separated, Mario embarks on an epic quest to find Luigi.',
     );
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Movie &&
+          runtimeType == other.runtimeType &&
+          voteCount == other.voteCount &&
+          id == other.id &&
+          voteAverage == other.voteAverage;
+
+  @override
+  int get hashCode => voteCount.hashCode ^ id.hashCode ^ voteAverage.hashCode;
 }

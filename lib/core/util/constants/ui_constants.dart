@@ -16,4 +16,11 @@ abstract class MovieDetailsUiConstants {
   static const double borderRadius = 30;
   static const String releaseDateTextConstant = 'Available on';
   static const String imageBaseUrl = 'https://image.tmdb.org/t/p/w500/';
+  static const String popularMoviesLabel = 'Popular Movies';
+  static const String moviesListTitle = 'Movies List';
+  static const String topRatedMoviesLabel= 'Top Rated Movies';
+  static const String nowPlayingMoviesLabel= 'Now Playing';
+  static const String upcomingMoviesLabel= 'Upcoming';
+  static const String movieKeyLabel = 'movie';
+  static const String emptyStatusMsg = 'There are no movies to display';
 }

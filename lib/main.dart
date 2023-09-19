@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
-import 'presentation/view/movie_list_view.dart';
 
+import 'core/util/constants/ui_constants.dart';
+import 'core/util/enums/endpoint.dart';
 import 'domain/entity/movie.dart';
+import 'domain/usecase/implementation/get_now_playing_movies_usecase.dart';
+import 'domain/usecase/implementation/get_popular_movies_usecase.dart';
+import 'domain/usecase/implementation/get_top_rated_movies_usecase.dart';
+import 'domain/usecase/implementation/get_upcoming_movies_usecase.dart';
+import 'presentation/bloc/movies_bloc.dart';
+import 'presentation/view/movies_grid_view.dart';
 
 void main() {
   runApp(MyApp());
@@ -20,9 +27,18 @@ class MyApp extends StatelessWidget {
           primary: Colors.black12,
         ),
       ),
-      home: const Scaffold(
+      home: Scaffold(
         backgroundColor: Colors.black12,
-        body: MovieListView(),
+        body: MoviesGridView(
+          bloc: MoviesBloc(
+            popularUsecase: GetPopularMoviesUseCase(),
+            nowPlayingUsecase: GetNowPlayingMoviesUseCase(),
+            topRatedUsecase: GetTopRatedMoviesUseCase(),
+            upcomingUsecase: GetUpcomingMoviesUseCase(),
+          ),
+          endpoint: Endpoint.popular,
+          title: MovieDetailsUiConstants.popularMoviesLabel,
+        ),
       ),
     );
   }

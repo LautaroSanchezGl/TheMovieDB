@@ -1,62 +1,70 @@
 import 'package:flutter/material.dart';
+
+import '../../core/util/enums/status.dart';
 import '../../domain/entity/genre.dart';
-import '../../data/repository/genre_repository.dart';
-import '../../domain/repository/genre_repository_interface.dart';
+import '../../domain/entity/genre_state.dart';
+import '../../domain/usecase/implementation/get_movie_genres_usecase.dart';
+import '../bloc/movie_genres_bloc.dart';
 import 'row_genre_item.dart';
 
 class Genres extends StatefulWidget {
-  const Genres({
+  Genres({
     super.key,
-    required this.genres,
+    required this.ids,
   });
 
-  final List<num> genres;
-  static const errorMessage = 'error while loading genres';
+  final MovieGenresBloc movieGenresBloc = MovieGenresBloc(
+    useCase: GetMovieGenresUseCase(),
+  );
+  final List<num> ids;
+  static const noGenresFoundErrorMessage = 'No Genres for the Movie were Found';
 
   @override
   State<Genres> createState() => _GenresState();
 }
 
 class _GenresState extends State<Genres> {
-  final IGenreRepository genreRepository = GenreRepositoryImp();
-  late Future<List<Genre>> genres;
-
   @override
   void initState() {
     super.initState();
-    genres = genreRepository.getGenreNamesById(widget.genres);
+    widget.movieGenresBloc.getMovieGenres(widget.ids);
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: genres,
+    return StreamBuilder<GenreState>(
+      initialData: widget.movieGenresBloc.initialData,
+      stream: widget.movieGenresBloc.movieGenres,
       builder: (
         BuildContext context,
-        AsyncSnapshot<List<Genre>> snapshot,
+        AsyncSnapshot<GenreState> snapshot,
       ) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(
-            child: CircularProgressIndicator(
-              color: Colors.white,
-            ),
-          );
-        }
-        if (snapshot.hasData) {
-          return Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: snapshot.data!
-                .map(
-                  (genre) => RowGenreItem(
-                    genre: genre.name,
-                  ),
-                )
-                .toList(),
-          );
-        } else {
-          return const Text(
-            Genres.errorMessage,
-          );
+        switch (snapshot.data!.status) {
+          case Status.loading:
+            return const Center(
+              child: CircularProgressIndicator(
+                color: Colors.white,
+              ),
+            );
+          case Status.success:
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: snapshot.data!.genres!
+                  .map(
+                    (genre) => RowGenreItem(
+                      genre: genre.name,
+                    ),
+                  )
+                  .toList(),
+            );
+          case Status.empty:
+            return const Text(
+              Genres.noGenresFoundErrorMessage,
+            );
+          case Status.failed:
+            return Text(
+              snapshot.data!.errorMsg!,
+            );
         }
       },
     );

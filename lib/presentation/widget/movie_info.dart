@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../domain/entity/movie.dart';
-import '../../core/util/text_styles/custom_text_style.dart';
+
 import '../../core/util/constants/ui_constants.dart';
 import '../view/movie_details_view.dart';
 
@@ -26,22 +26,12 @@ class MovieInfo extends StatelessWidget {
           ),
         );
       },
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            movie.title,
-            textAlign: TextAlign.center,
-            style: CustomTextStyle.overviewTextStyleBoldWhite,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(
-                MovieDetailsUiConstants.releaseDateRowPadding),
-            child: Image.network(
-              '${MovieDetailsUiConstants.imageBaseUrl}${movie.posterPath}',
-            ),
-          ),
-        ],
+      child: Padding(
+        padding:
+            const EdgeInsets.all(MovieDetailsUiConstants.releaseDateRowPadding),
+        child: Image.network(
+          '${MovieDetailsUiConstants.imageBaseUrl}${movie.posterPath}',
+        ),
       ),
     );
   }
