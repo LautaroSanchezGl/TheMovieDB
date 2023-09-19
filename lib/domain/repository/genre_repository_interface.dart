@@ -1,5 +1,7 @@
-import '../entity/genre.dart';
+import '../../data/model/data_state.dart';
 
-abstract class IGenreRepository{
-  Future<List<Genre>> getGenreNamesById(List<num> ids);
+import '../../data/model/genre_model.dart';
+
+abstract class IGenreRepository {
+  Future<DataState<List<GenreModel>>> getMovieGenres(List<num> ids);
 }
