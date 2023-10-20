@@ -7,7 +7,11 @@ import '../model/data_state.dart';
 import '../model/movie_model.dart';
 
 class MovieRepositoryImp implements IMovieRepository {
-  ApiService apiService = ApiService();
+  final ApiService apiService;
+
+  MovieRepositoryImp({
+    required this.apiService,
+  });
 
   static const String baseUrl = 'https://api.themoviedb.org/3/movie/';
   static const String topRated = 'top_rated';

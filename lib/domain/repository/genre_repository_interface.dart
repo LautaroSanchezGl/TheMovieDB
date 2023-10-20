@@ -4,4 +4,5 @@ import '../../data/model/genre_model.dart';
 
 abstract class IGenreRepository {
   Future<DataState<List<GenreModel>>> getMovieGenres(List<num> ids);
+  Future<List<GenreModel>> getAllGenres();
 }

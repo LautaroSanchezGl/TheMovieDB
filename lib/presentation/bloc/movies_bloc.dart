@@ -6,23 +6,15 @@ import '../../core/util/enums/status.dart';
 import '../../data/model/data_state.dart';
 import '../../domain/entity/movie.dart';
 import '../../domain/entity/movie_state.dart';
-import '../../domain/usecase/implementation/get_now_playing_movies_usecase.dart';
-import '../../domain/usecase/implementation/get_popular_movies_usecase.dart';
-import '../../domain/usecase/implementation/get_top_rated_movies_usecase.dart';
-import '../../domain/usecase/implementation/get_upcoming_movies_usecase.dart';
+import '../../domain/usecase/implementation/get_movies_usecase.dart';
+
 
 class MoviesBloc implements IBloc {
   MoviesBloc({
-    required this.popularUsecase,
-    required this.nowPlayingUsecase,
-    required this.topRatedUsecase,
-    required this.upcomingUsecase,
+    required this.moviesUsecase,
   });
 
-  final GetPopularMoviesUseCase popularUsecase;
-  final GetNowPlayingMoviesUseCase nowPlayingUsecase;
-  final GetTopRatedMoviesUseCase topRatedUsecase;
-  final GetUpcomingMoviesUseCase upcomingUsecase;
+  final GetMoviesUseCase moviesUsecase;
 
   final _movies = StreamController<MovieState>.broadcast();
   Stream<MovieState> get movies => _movies.stream;
@@ -31,17 +23,7 @@ class MoviesBloc implements IBloc {
       );
 
   void getMovies(Endpoint endpoint) async {
-    DataState<List<Movie>> data;
-    switch (endpoint) {
-      case Endpoint.popular:
-        data = await popularUsecase.call();
-      case Endpoint.nowPlaying:
-        data = await nowPlayingUsecase.call();
-      case Endpoint.topRated:
-        data = await topRatedUsecase.call();
-      case Endpoint.upcoming:
-        data = await upcomingUsecase.call();
-    }
+    DataState<List<Movie>> data = await moviesUsecase.call(params: endpoint);
 
     MovieState movieState = data is DataFailed
         ? MovieState(

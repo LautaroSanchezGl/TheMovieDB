@@ -3,17 +3,19 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i5;
+import 'dart:async' as _i6;
 
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:movie_db/data/model/data_state.dart' as _i3;
-import 'package:movie_db/domain/entity/movie.dart' as _i6;
+import 'package:movie_db/data/model/data_state.dart' as _i4;
+import 'package:movie_db/domain/entity/movie.dart' as _i7;
+import 'package:movie_db/domain/repository/movie_database_repository_interface.dart'
+    as _i3;
 import 'package:movie_db/domain/repository/movie_repository_interface.dart'
     as _i2;
-import 'package:movie_db/domain/usecase/implementation/get_popular_movies_usecase.dart'
-    as _i4;
+import 'package:movie_db/domain/usecase/implementation/get_movies_usecase.dart'
+    as _i5;
 import 'package:movie_db/domain/usecase/implementation/get_upcoming_movies_usecase.dart'
-    as _i7;
+    as _i8;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -37,8 +39,19 @@ class _FakeIMovieRepository_0 extends _i1.SmartFake
         );
 }
 
-class _FakeDataState_1<T> extends _i1.SmartFake implements _i3.DataState<T> {
-  _FakeDataState_1(
+class _FakeIMovieDatabaseRepository_1 extends _i1.SmartFake
+    implements _i3.IMovieDatabaseRepository {
+  _FakeIMovieDatabaseRepository_1(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeDataState_2<T> extends _i1.SmartFake implements _i4.DataState<T> {
+  _FakeDataState_2(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -51,7 +64,7 @@ class _FakeDataState_1<T> extends _i1.SmartFake implements _i3.DataState<T> {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockGetPopularMoviesUseCase extends _i1.Mock
-    implements _i4.GetPopularMoviesUseCase {
+    implements _i5.GetMoviesUseCase {
   MockGetPopularMoviesUseCase() {
     _i1.throwOnMissingStub(this);
   }
@@ -65,24 +78,24 @@ class MockGetPopularMoviesUseCase extends _i1.Mock
         ),
       ) as _i2.IMovieRepository);
   @override
-  set movieRepository(_i2.IMovieRepository? _movieRepository) =>
-      super.noSuchMethod(
-        Invocation.setter(
-          #movieRepository,
-          _movieRepository,
+  _i3.IMovieDatabaseRepository get movieDataBaseRepository =>
+      (super.noSuchMethod(
+        Invocation.getter(#movieDataBaseRepository),
+        returnValue: _FakeIMovieDatabaseRepository_1(
+          this,
+          Invocation.getter(#movieDataBaseRepository),
         ),
-        returnValueForMissingStub: null,
-      );
+      ) as _i3.IMovieDatabaseRepository);
   @override
-  _i5.Future<_i3.DataState<List<_i6.Movie>>> call({dynamic params}) =>
+  _i6.Future<_i4.DataState<List<_i7.Movie>>> call({dynamic params}) =>
       (super.noSuchMethod(
         Invocation.method(
           #call,
           [],
           {#params: params},
         ),
-        returnValue: _i5.Future<_i3.DataState<List<_i6.Movie>>>.value(
-            _FakeDataState_1<List<_i6.Movie>>(
+        returnValue: _i6.Future<_i4.DataState<List<_i7.Movie>>>.value(
+            _FakeDataState_2<List<_i7.Movie>>(
           this,
           Invocation.method(
             #call,
@@ -90,14 +103,14 @@ class MockGetPopularMoviesUseCase extends _i1.Mock
             {#params: params},
           ),
         )),
-      ) as _i5.Future<_i3.DataState<List<_i6.Movie>>>);
+      ) as _i6.Future<_i4.DataState<List<_i7.Movie>>>);
 }
 
 /// A class which mocks [GetUpcomingMoviesUseCase].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockGetUpcomingMoviesUseCase extends _i1.Mock
-    implements _i7.GetUpcomingMoviesUseCase {
+    implements _i8.GetUpcomingMoviesUseCase {
   MockGetUpcomingMoviesUseCase() {
     _i1.throwOnMissingStub(this);
   }
@@ -111,24 +124,24 @@ class MockGetUpcomingMoviesUseCase extends _i1.Mock
         ),
       ) as _i2.IMovieRepository);
   @override
-  set movieRepository(_i2.IMovieRepository? _movieRepository) =>
-      super.noSuchMethod(
-        Invocation.setter(
-          #movieRepository,
-          _movieRepository,
+  _i3.IMovieDatabaseRepository get movieDataBaseRepository =>
+      (super.noSuchMethod(
+        Invocation.getter(#movieDataBaseRepository),
+        returnValue: _FakeIMovieDatabaseRepository_1(
+          this,
+          Invocation.getter(#movieDataBaseRepository),
         ),
-        returnValueForMissingStub: null,
-      );
+      ) as _i3.IMovieDatabaseRepository);
   @override
-  _i5.Future<_i3.DataState<List<_i6.Movie>>> call({dynamic params}) =>
+  _i6.Future<_i4.DataState<List<_i7.Movie>>> call({dynamic params}) =>
       (super.noSuchMethod(
         Invocation.method(
           #call,
           [],
           {#params: params},
         ),
-        returnValue: _i5.Future<_i3.DataState<List<_i6.Movie>>>.value(
-            _FakeDataState_1<List<_i6.Movie>>(
+        returnValue: _i6.Future<_i4.DataState<List<_i7.Movie>>>.value(
+            _FakeDataState_2<List<_i7.Movie>>(
           this,
           Invocation.method(
             #call,
@@ -136,5 +149,5 @@ class MockGetUpcomingMoviesUseCase extends _i1.Mock
             {#params: params},
           ),
         )),
-      ) as _i5.Future<_i3.DataState<List<_i6.Movie>>>);
+      ) as _i6.Future<_i4.DataState<List<_i7.Movie>>>);
 }

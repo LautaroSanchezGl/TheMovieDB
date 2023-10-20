@@ -73,4 +73,12 @@ class MockApiService extends _i1.Mock implements _i3.ApiService {
           ),
         )),
       ) as _i4.Future<_i2.DataState<List<_i6.MovieModel>>>);
+  @override
+  _i4.Future<List<_i5.GenreModel>> getAllGenres() => (super.noSuchMethod(
+        Invocation.method(
+          #getAllGenres,
+          [],
+        ),
+        returnValue: _i4.Future<List<_i5.GenreModel>>.value(<_i5.GenreModel>[]),
+      ) as _i4.Future<List<_i5.GenreModel>>);
 }
