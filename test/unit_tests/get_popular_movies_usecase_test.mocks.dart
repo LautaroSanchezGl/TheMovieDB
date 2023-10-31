@@ -61,14 +61,6 @@ class MockMovieRepositoryImp extends _i1.Mock
         ),
       ) as _i2.ApiService);
   @override
-  set apiService(_i2.ApiService? _apiService) => super.noSuchMethod(
-        Invocation.setter(
-          #apiService,
-          _apiService,
-        ),
-        returnValueForMissingStub: null,
-      );
-  @override
   _i5.Future<_i3.DataState<List<_i6.MovieModel>>> getMovies(
           {required _i7.Endpoint? endpoint}) =>
       (super.noSuchMethod(

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../bloc/movie_genres_bloc.dart';
 import '../widget/popularity_adult_and_original_language.dart';
 
 import '../widget/genres_row.dart';
@@ -50,6 +52,7 @@ class MovieDetailsView extends StatelessWidget {
                 ),
                 Genres(
                   ids: movie.genres,
+                  movieGenresBloc: Provider.of<MovieGenresBloc>(context),
                 ),
                 const SizedBox(
                   height: MovieDetailsUiConstants.sizedBoxHeight,

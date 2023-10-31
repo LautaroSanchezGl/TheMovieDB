@@ -1,8 +1,12 @@
+import 'package:floor/floor.dart';
+
+@entity
 class Movie {
   final int voteCount;
   final bool video;
   final double popularity;
   final String originalLanguage;
+  @primaryKey
   final int id;
   final bool adult;
   final String title;
@@ -13,8 +17,9 @@ class Movie {
   final String releaseDate;
   final double voteAverage;
   final String overview;
+  List<String> categories;
 
-  const Movie({
+  Movie({
     required this.voteCount,
     required this.video,
     required this.popularity,
@@ -29,6 +34,7 @@ class Movie {
     required this.releaseDate,
     required this.voteAverage,
     required this.overview,
+    required this.categories,
   });
 
   Movie.fromJson(Map<String, dynamic> json)
@@ -45,10 +51,11 @@ class Movie {
         backdropPath = json['backdrop_path'],
         releaseDate = json['release_date'],
         voteAverage = json['vote_average'],
-        overview = json['overview'];
+        overview = json['overview'],
+        categories = [];
 
   factory Movie.mockMovie() {
-    return const Movie(
+    return Movie(
       voteCount: 1,
       video: false,
       popularity: 23,
@@ -72,6 +79,7 @@ class Movie {
           'While working underground to fix a water main, Brooklyn plumbers—and brothers—Mario and Luigi '
           'are transported down a mysterious pipe and wander into a magical new world. But when the '
           'brothers are separated, Mario embarks on an epic quest to find Luigi.',
+      categories: [],
     );
   }
 

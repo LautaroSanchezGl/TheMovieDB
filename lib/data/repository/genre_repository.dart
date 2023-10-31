@@ -11,4 +11,9 @@ class GenreRepositoryImp implements IGenreRepository {
   Future<DataState<List<GenreModel>>> getMovieGenres(List<num> ids) {
     return apiService.getGenreNamesById(ids);
   }
+
+  @override
+  Future<List<GenreModel>> getAllGenres() {
+    return apiService.getAllGenres();
+  }
 }

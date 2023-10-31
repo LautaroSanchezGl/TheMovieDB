@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../core/util/enums/status.dart';
-import '../../domain/entity/genre.dart';
 import '../../domain/entity/genre_state.dart';
-import '../../domain/usecase/implementation/get_movie_genres_usecase.dart';
 import '../bloc/movie_genres_bloc.dart';
 import 'row_genre_item.dart';
 
@@ -11,11 +9,10 @@ class Genres extends StatefulWidget {
   Genres({
     super.key,
     required this.ids,
+    required this.movieGenresBloc,
   });
 
-  final MovieGenresBloc movieGenresBloc = MovieGenresBloc(
-    useCase: GetMovieGenresUseCase(),
-  );
+  final MovieGenresBloc movieGenresBloc;
   final List<num> ids;
   static const noGenresFoundErrorMessage = 'No Genres for the Movie were Found';
 

@@ -10,7 +10,7 @@ import 'package:movie_db/core/util/enums/endpoint.dart' as _i9;
 import 'package:movie_db/domain/entity/movie_state.dart' as _i6;
 import 'package:movie_db/domain/usecase/implementation/get_now_playing_movies_usecase.dart'
     as _i3;
-import 'package:movie_db/domain/usecase/implementation/get_popular_movies_usecase.dart'
+import 'package:movie_db/domain/usecase/implementation/get_movies_usecase.dart'
     as _i2;
 import 'package:movie_db/domain/usecase/implementation/get_top_rated_movies_usecase.dart'
     as _i4;
@@ -30,7 +30,7 @@ import 'package:movie_db/presentation/bloc/movies_bloc.dart' as _i7;
 // ignore_for_file: subtype_of_sealed_class
 
 class _FakeGetPopularMoviesUseCase_0 extends _i1.SmartFake
-    implements _i2.GetPopularMoviesUseCase {
+    implements _i2.GetMoviesUseCase {
   _FakeGetPopularMoviesUseCase_0(
     Object parent,
     Invocation parentInvocation,
@@ -92,13 +92,13 @@ class MockMoviesBloc extends _i1.Mock implements _i7.MoviesBloc {
   }
 
   @override
-  _i2.GetPopularMoviesUseCase get popularUsecase => (super.noSuchMethod(
+  _i2.GetMoviesUseCase get moviesUsecase => (super.noSuchMethod(
         Invocation.getter(#popularUsecase),
         returnValue: _FakeGetPopularMoviesUseCase_0(
           this,
           Invocation.getter(#popularUsecase),
         ),
-      ) as _i2.GetPopularMoviesUseCase);
+      ) as _i2.GetMoviesUseCase);
   @override
   _i3.GetNowPlayingMoviesUseCase get nowPlayingUsecase => (super.noSuchMethod(
         Invocation.getter(#nowPlayingUsecase),

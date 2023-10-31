@@ -66,4 +66,25 @@ class ApiService {
       return const DataFailed(errorMsg);
     }
   }
+
+  Future<List<GenreModel>> getAllGenres() async {
+    try {
+      final response = await http.get(
+        Uri.parse(
+          genresUrl,
+        ),
+        headers: {
+          HttpHeaders.authorizationHeader: authToken,
+        },
+      );
+      List<dynamic> genres = json.decode(response.body)['genres'];
+      return genres
+          .map(
+            (genre) => GenreModel.fromJson(genre),
+          )
+          .toList();
+    } on Exception catch (e) {
+      rethrow;
+    }
+  }
 }

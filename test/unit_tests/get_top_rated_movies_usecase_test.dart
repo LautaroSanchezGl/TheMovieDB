@@ -8,7 +8,7 @@ import 'package:movie_db/data/repository/movie_repository.dart';
 import 'package:movie_db/domain/entity/movie.dart';
 import 'package:movie_db/domain/usecase/implementation/get_now_playing_movies_usecase.dart';
 
-import 'package:movie_db/domain/usecase/implementation/get_popular_movies_usecase.dart';
+import 'package:movie_db/domain/usecase/implementation/get_movies_usecase.dart';
 import 'package:movie_db/domain/usecase/implementation/get_top_rated_movies_usecase.dart';
 
 import 'get_popular_movies_usecase_test.mocks.dart';

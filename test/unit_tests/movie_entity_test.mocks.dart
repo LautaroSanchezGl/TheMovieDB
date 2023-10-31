@@ -95,4 +95,17 @@ class MockMovie extends _i1.Mock implements _i2.Movie {
         Invocation.getter(#overview),
         returnValue: '',
       ) as String);
+  @override
+  List<String> get categories => (super.noSuchMethod(
+        Invocation.getter(#categories),
+        returnValue: <String>[],
+      ) as List<String>);
+  @override
+  set categories(List<String>? _categories) => super.noSuchMethod(
+        Invocation.setter(
+          #categories,
+          _categories,
+        ),
+        returnValueForMissingStub: null,
+      );
 }
