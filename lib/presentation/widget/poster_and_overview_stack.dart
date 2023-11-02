@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../core/util/constants/ui_constants.dart';
+
+import 'fav_button.dart';
 import 'fav_button_counter_column.dart';
 import 'movie_overview.dart';
 
@@ -9,10 +11,14 @@ class PosterAndOverviewStack extends StatelessWidget {
     super.key,
     required this.poster,
     required this.overview,
+    required this.title,
+    required this.id,
   });
 
   final String poster;
   final String overview;
+  final String title;
+  final int id;
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +27,15 @@ class PosterAndOverviewStack extends StatelessWidget {
         Image.network(
           '${MovieDetailsUiConstants.imageBaseUrl}$poster',
         ),
-        const Positioned(
-          top: MovieDetailsUiConstants.favButtonColumTopPosition,
-          right: MovieDetailsUiConstants.favButtonColumnRightPosition,
-          child: FavoriteButtonCounter(),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            FavButton(
+              title: title,
+              id: id,
+            ),
+            const LikeButtonCounter(),
+          ],
         ),
         MovieOverview(
           overview: overview,

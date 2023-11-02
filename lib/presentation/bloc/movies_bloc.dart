@@ -21,6 +21,7 @@ class MoviesBloc implements IBloc {
   MovieState get initialData => MovieState(
         status: Status.loading,
       );
+  List<int> favMovies = [];
 
   void getMovies(Endpoint endpoint) async {
     DataState<List<Movie>> data = await moviesUsecase.call(params: endpoint);
@@ -36,6 +37,14 @@ class MoviesBloc implements IBloc {
           );
 
     _movies.sink.add(movieState);
+  }
+
+  void addFavMovie({required int movieId}){
+    favMovies.add(movieId);
+  }
+
+  void removeFavMovie({required int movieId}){
+    favMovies.remove(movieId);
   }
 
   @override

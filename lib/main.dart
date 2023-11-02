@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'core/util/constants/ui_constants.dart';
 import 'core/util/enums/endpoint.dart';
+import 'core/util/notifications/notification_service.dart';
 import 'data/datasource/local/movie_database.dart';
 import 'data/datasource/remote/api_service.dart';
 import 'data/repository/genre_database_repository_imp.dart';
@@ -19,32 +20,39 @@ import 'package:provider/provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  NotificationService().initNotifications();
   const databaseName = 'movie_database_v3';
   final db = await $FloorMovieDatabase.databaseBuilder(databaseName).build();
   final apiService = ApiService();
   final genreDatabaseRepositoryImp = GenreDatabaseRepositoryImp(db);
 
-  runApp(Provider(
-    create: (_) => MovieGenresBloc(
-      useCase: GetMovieGenresUseCase(
-          genreDatabaseRepository: genreDatabaseRepositoryImp),
-    ),
-    child: MyApp(
-      movieRepository: MovieRepositoryImp(apiService: apiService),
-      movieDatabaseRepository: MovieDatabaseRepositoryImp(db),
-    ),
+  runApp(MultiProvider(
+    providers: [
+      Provider<MovieGenresBloc>(
+        create: (_) => MovieGenresBloc(
+          useCase: GetMovieGenresUseCase(
+              genreDatabaseRepository: genreDatabaseRepositoryImp),
+        ),
+      ),
+      Provider<MoviesBloc>(
+        create: (_) => MoviesBloc(
+          moviesUsecase: GetMoviesUseCase(
+            movieRepository: MovieRepositoryImp(
+              apiService: apiService,
+            ),
+            movieDataBaseRepository: MovieDatabaseRepositoryImp(db),
+          ),
+        ),
+      )
+    ],
+    child: const MyApp(),
   ));
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({
     super.key,
-    required this.movieRepository,
-    required this.movieDatabaseRepository,
   });
-
-  final IMovieRepository movieRepository;
-  final IMovieDatabaseRepository movieDatabaseRepository;
 
   @override
   Widget build(BuildContext context) {
@@ -57,12 +65,7 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         backgroundColor: Colors.black12,
         body: MoviesGridView(
-          bloc: MoviesBloc(
-            moviesUsecase: GetMoviesUseCase(
-              movieRepository: movieRepository,
-              movieDataBaseRepository: movieDatabaseRepository,
-            ),
-          ),
+          bloc: Provider.of<MoviesBloc>(context),
           endpoint: Endpoint.popular,
           title: MovieDetailsUiConstants.popularMoviesLabel,
         ),
