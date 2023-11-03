@@ -8,8 +8,7 @@ import 'data/datasource/remote/api_service.dart';
 import 'data/repository/genre_database_repository_imp.dart';
 import 'data/repository/movie_database_repository_imp.dart';
 import 'data/repository/movie_repository.dart';
-import 'domain/repository/movie_database_repository_interface.dart';
-import 'domain/repository/movie_repository_interface.dart';
+
 import 'domain/usecase/implementation/get_movie_genres_usecase.dart';
 import 'domain/usecase/implementation/get_movies_usecase.dart';
 

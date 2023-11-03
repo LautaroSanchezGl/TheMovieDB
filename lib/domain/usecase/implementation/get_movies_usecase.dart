@@ -36,4 +36,11 @@ class GetMoviesUseCase implements UseCase<DataState> {
       return movies;
     }
   }
+
+  Future<DataState<List<Movie>>> getFavoriteMovies(
+      {required List<int> moviesId}) async {
+    DataState<List<Movie>> favoriteMovies =
+        await movieRepository.getFavoriteMovies(moviesId: moviesId);
+    return favoriteMovies;
+  }
 }

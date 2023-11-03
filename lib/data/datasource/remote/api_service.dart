@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:http/http.dart' as http;
 
+import '../../../core/util/constants/ui_constants.dart';
 import '../../model/data_state.dart';
 import '../../model/genre_model.dart';
 
@@ -15,6 +16,8 @@ class ApiService {
   static const String genresUrl =
       'https://api.themoviedb.org/3/genre/movie/list';
   static const String errorMsg = 'error while fetching genres';
+  static const String favoriteMoviesErrorMsg =
+      'error while fetching favorite movies';
 
   Future<DataState<List<GenreModel>>> getGenreNamesById(List<num> ids) async {
     try {
@@ -83,6 +86,41 @@ class ApiService {
             (genre) => GenreModel.fromJson(genre),
           )
           .toList();
+    } on Exception catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<DataState<List<MovieModel>>> getFavoriteMovies(
+      List<int> movieIds) async {
+    List<MovieModel> favoriteMovies = [];
+    try {
+      for (final id in movieIds) {
+        final response = await http.get(
+          Uri.parse(
+            '${MovieDetailsUiConstants.baseUrl}/$id',
+          ),
+          headers: {
+            HttpHeaders.authorizationHeader: authToken,
+          },
+        );
+        if (response.statusCode == HttpStatus.ok) {
+          favoriteMovies.add(
+            MovieModel.favoriteMovieFromJson(
+              json.decode(
+                response.body,
+              ),
+            ),
+          );
+        } else {
+          return const DataFailed(
+            favoriteMoviesErrorMsg,
+          );
+        }
+      }
+      return DataSuccess(
+        favoriteMovies,
+      );
     } on Exception catch (e) {
       rethrow;
     }

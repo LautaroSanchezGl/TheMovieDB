@@ -52,4 +52,25 @@ class MovieModel extends Movie {
       voteCount: json['vote_count'],
     );
   }
+
+  factory MovieModel.favoriteMovieFromJson(Map<String, dynamic> json) {
+    List<dynamic> genres = json['genres'];
+    List<int> genreIds = genres.map((genre) => genre['id'] as int).toList();
+    return MovieModel(
+      adult: json['adult'],
+      backdropPath: json['backdrop_path'] ?? "",
+      genreIds: genreIds,
+      id: json['id'],
+      originalLanguage: json['original_language'],
+      originalTitle: json['original_title'],
+      overview: json['overview'],
+      popularity: json['popularity'],
+      posterPath: json['poster_path'],
+      releaseDate: json['release_date'],
+      title: json['title'],
+      video: json['video'],
+      voteAverage: json['vote_average'].toDouble(),
+      voteCount: json['vote_count'],
+    );
+  }
 }

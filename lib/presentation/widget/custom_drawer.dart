@@ -60,6 +60,14 @@ class CustomDrawer extends StatelessWidget {
               bloc: bloc,
             ),
           ),
+          DrawerTile(
+            title: MovieDetailsUiConstants.favoriteMoviesLabel,
+            view: MoviesGridView(
+              bloc: bloc,
+              title: MovieDetailsUiConstants.favoriteMoviesLabel,
+              endpoint: null,
+            ),
+          )
         ],
       ),
     );

@@ -26,8 +26,8 @@ class _FavButtonState extends State<FavButton> {
   static const String removedNotificationBody = ' Removed from favorites';
   static const String addedNotificationBody = 'Added to favorites';
 
-  bool isFav() =>
-      Provider.of<MoviesBloc>(context).favMovies.contains(widget.id);
+  bool isFavoriteMovie() =>
+      Provider.of<MoviesBloc>(context).favoriteMoviesIds.contains(widget.id);
 
   void showNotification({required String body}) {
     NotificationService().showNotification(
@@ -39,24 +39,24 @@ class _FavButtonState extends State<FavButton> {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
-      onPressed: isFav()
+      onPressed: isFavoriteMovie()
           ? () => setState(() {
                 Provider.of<MoviesBloc>(context, listen: false)
-                    .removeFavMovie(movieId: widget.id);
+                    .removeFromFavorite(movieId: widget.id);
                 showNotification(body: removedNotificationBody);
               })
           : () => setState(() {
                 Provider.of<MoviesBloc>(context, listen: false)
-                    .addFavMovie(movieId: widget.id);
+                    .addToFavorite(movieId: widget.id);
                 showNotification(body: addedNotificationBody);
               }),
       icon: Icon(
-        isFav() ? Icons.favorite : Icons.favorite_border_outlined,
+        isFavoriteMovie() ? Icons.favorite : Icons.favorite_border_outlined,
         color: Colors.red,
         size: MovieDetailsUiConstants.iconSize,
       ),
       label: Text(
-        isFav() ? removeActionText : addActionText,
+        isFavoriteMovie() ? removeActionText : addActionText,
       ),
     );
   }

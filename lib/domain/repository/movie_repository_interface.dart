@@ -5,4 +5,5 @@ import '../../data/model/movie_model.dart';
 
 abstract class IMovieRepository {
   Future<DataState<List<MovieModel>>> getMovies({required Endpoint endpoint});
+  Future<DataState<List<MovieModel>>> getFavoriteMovies({required List<int> moviesId});
 }

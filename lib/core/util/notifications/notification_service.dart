@@ -1,6 +1,8 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class NotificationService {
+  static const String channelId = 'channelId';
+  static const String channelName = 'channelName';
   final FlutterLocalNotificationsPlugin notificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
@@ -12,8 +14,12 @@ class NotificationService {
         requestAlertPermission: true,
         requestBadgePermission: true,
         requestSoundPermission: true,
-        onDidReceiveLocalNotification:
-            (int id, String? title, String? body, String? payload) async {});
+        onDidReceiveLocalNotification: (
+          int id,
+          String? title,
+          String? body,
+          String? payload,
+        ) async {});
 
     var initializationSettings = InitializationSettings(
       android: initializationSettingsAndroid,
@@ -27,8 +33,8 @@ class NotificationService {
   notificationDetails() {
     return const NotificationDetails(
         android: AndroidNotificationDetails(
-          'channelId',
-          'channelName',
+          channelId,
+          channelName,
           importance: Importance.max,
         ),
         iOS: DarwinNotificationDetails());

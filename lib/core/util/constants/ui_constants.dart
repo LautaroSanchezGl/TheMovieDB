@@ -23,4 +23,6 @@ abstract class MovieDetailsUiConstants {
   static const String upcomingMoviesLabel= 'Upcoming';
   static const String movieKeyLabel = 'movie';
   static const String emptyStatusMsg = 'There are no movies to display';
+  static const String baseUrl = 'https://api.themoviedb.org/3/movie/';
+  static const String favoriteMoviesLabel = 'Favorite Movies';
 }
