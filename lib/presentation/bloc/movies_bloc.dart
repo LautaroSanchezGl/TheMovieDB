@@ -8,7 +8,6 @@ import '../../domain/entity/movie.dart';
 import '../../domain/entity/movie_state.dart';
 import '../../domain/usecase/implementation/get_movies_usecase.dart';
 
-
 class MoviesBloc implements IBloc {
   MoviesBloc({
     required this.moviesUsecase,
@@ -18,12 +17,21 @@ class MoviesBloc implements IBloc {
 
   final _movies = StreamController<MovieState>.broadcast();
   Stream<MovieState> get movies => _movies.stream;
+
   MovieState get initialData => MovieState(
         status: Status.loading,
       );
+  List<int> favoriteMoviesIds = [];
 
   void getMovies(Endpoint endpoint) async {
-    DataState<List<Movie>> data = await moviesUsecase.call(params: endpoint);
+    final params = <String, dynamic>{};
+    params.addAll({'endpoint': endpoint});
+
+    if (endpoint == Endpoint.favorites) {
+      params.addAll({'movieIds': favoriteMoviesIds});
+    }
+
+    DataState<List<Movie>> data = await moviesUsecase.call(params: params);
 
     MovieState movieState = data is DataFailed
         ? MovieState(
@@ -36,6 +44,14 @@ class MoviesBloc implements IBloc {
           );
 
     _movies.sink.add(movieState);
+  }
+
+  void addToFavorite({required int movieId}) {
+    favoriteMoviesIds.add(movieId);
+  }
+
+  void removeFromFavorite({required int movieId}) {
+    favoriteMoviesIds.remove(movieId);
   }
 
   @override

@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 
 import '../../core/util/constants/ui_constants.dart';
 
-class FavoriteButtonCounter extends StatefulWidget {
-  const FavoriteButtonCounter({
+class LikeButtonCounter extends StatefulWidget {
+  const LikeButtonCounter({
     super.key,
   });
 
   @override
-  State<FavoriteButtonCounter> createState() => _FavoriteButtonCounterState();
+  State<LikeButtonCounter> createState() => _LikeButtonCounterState();
 }
 
-class _FavoriteButtonCounterState extends State<FavoriteButtonCounter> {
+class _LikeButtonCounterState extends State<LikeButtonCounter> {
   int _counter = 0;
 
   void increaseCounter() {
@@ -29,7 +29,7 @@ class _FavoriteButtonCounterState extends State<FavoriteButtonCounter> {
             increaseCounter();
           },
           icon: const Icon(
-            Icons.favorite_outlined,
+            Icons.star,
             color: Colors.red,
             size: MovieDetailsUiConstants.iconSize,
           ),

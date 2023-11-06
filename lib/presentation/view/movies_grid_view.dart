@@ -35,6 +35,7 @@ class _MoviesGridViewState extends State<MoviesGridView> {
   @override
   void initState() {
     widget.bloc.getMovies(widget.endpoint);
+
     super.initState();
   }
 

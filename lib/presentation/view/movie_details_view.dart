@@ -10,7 +10,6 @@ import '../widget/release_date_and_vote_average_row.dart';
 import '../../domain/entity/movie.dart';
 import '../../core/util/constants/ui_constants.dart';
 
-
 class MovieDetailsView extends StatelessWidget {
   const MovieDetailsView({
     super.key,
@@ -60,6 +59,8 @@ class MovieDetailsView extends StatelessWidget {
                 PosterAndOverviewStack(
                   poster: movie.posterPath,
                   overview: movie.overview,
+                  title: movie.title,
+                  id: movie.id,
                 ),
               ],
             ),
