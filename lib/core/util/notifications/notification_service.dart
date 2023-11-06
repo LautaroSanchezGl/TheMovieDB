@@ -32,12 +32,13 @@ class NotificationService {
 
   notificationDetails() {
     return const NotificationDetails(
-        android: AndroidNotificationDetails(
-          channelId,
-          channelName,
-          importance: Importance.max,
-        ),
-        iOS: DarwinNotificationDetails());
+      android: AndroidNotificationDetails(
+        channelId,
+        channelName,
+        importance: Importance.max,
+      ),
+      iOS: DarwinNotificationDetails(),
+    );
   }
 
   Future<void> showNotification({
@@ -47,6 +48,10 @@ class NotificationService {
     String? payload,
   }) async {
     return notificationsPlugin.show(
-        id, title, body, await notificationDetails());
+      id,
+      title,
+      body,
+      await notificationDetails(),
+    );
   }
 }

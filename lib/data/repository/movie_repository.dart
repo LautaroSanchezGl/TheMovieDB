@@ -1,6 +1,5 @@
 import '../../core/util/constants/ui_constants.dart';
 import '../../core/util/enums/endpoint.dart';
-import '../../domain/entity/movie.dart';
 import '../../domain/repository/movie_repository_interface.dart';
 
 import '../datasource/remote/api_service.dart';
@@ -20,7 +19,9 @@ class MovieRepositoryImp implements IMovieRepository {
   static const String upcoming = 'upcoming';
 
   @override
-  Future<DataState<List<MovieModel>>> getMovies({required Endpoint endpoint}) {
+  Future<DataState<List<MovieModel>>> getMovies(
+      {required Map<String, dynamic> params}) {
+    Endpoint endpoint = params['endpoint'];
     switch (endpoint) {
       case Endpoint.popular:
         return apiService
@@ -34,12 +35,15 @@ class MovieRepositoryImp implements IMovieRepository {
       case Endpoint.upcoming:
         return apiService
             .getMovies('${MovieDetailsUiConstants.baseUrl}$upcoming');
+      case Endpoint.favorites:
+        final movieIds = List<int>.from(params['movieIds']);
+        return apiService.getMoviesByIds(movieIds);
     }
   }
 
   @override
-  Future<DataState<List<MovieModel>>> getFavoriteMovies(
+  Future<DataState<List<MovieModel>>> getMoviesByIds(
       {required List<int> moviesId}) {
-    return apiService.getFavoriteMovies(moviesId);
+    return apiService.getMoviesByIds(moviesId);
   }
 }

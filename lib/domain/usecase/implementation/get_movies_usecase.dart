@@ -22,25 +22,18 @@ class GetMoviesUseCase implements UseCase<DataState> {
   @override
   Future<DataState<List<Movie>>> call({params}) async {
     final connectivityResult = await Connectivity().checkConnectivity();
-    Endpoint endpoint = params;
+    Endpoint endpoint = params['endpoint'];
     if (connectivityResult == ConnectivityResult.none) {
       List<Movie> movies =
           await movieDataBaseRepository.getMovies(category: endpoint.category);
       return DataSuccess(movies);
     } else {
       DataState<List<Movie>> movies =
-          await movieRepository.getMovies(endpoint: endpoint);
+          await movieRepository.getMovies(params: params);
       for (var movie in movies.data!) {
         movieDataBaseRepository.uploadDb(movie: movie, endpoint: endpoint);
       }
       return movies;
     }
-  }
-
-  Future<DataState<List<Movie>>> getFavoriteMovies(
-      {required List<int> moviesId}) async {
-    DataState<List<Movie>> favoriteMovies =
-        await movieRepository.getFavoriteMovies(moviesId: moviesId);
-    return favoriteMovies;
   }
 }

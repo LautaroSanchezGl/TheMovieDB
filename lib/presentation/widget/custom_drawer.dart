@@ -65,7 +65,7 @@ class CustomDrawer extends StatelessWidget {
             view: MoviesGridView(
               bloc: bloc,
               title: MovieDetailsUiConstants.favoriteMoviesLabel,
-              endpoint: null,
+              endpoint: Endpoint.favorites,
             ),
           )
         ],

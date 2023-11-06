@@ -20,7 +20,7 @@ class MoviesGridView extends StatefulWidget {
   });
 
   final MoviesBloc bloc;
-  final Endpoint? endpoint;
+  final Endpoint endpoint;
   final String title;
   @override
   State<MoviesGridView> createState() => _MoviesGridViewState();
@@ -34,16 +34,14 @@ class _MoviesGridViewState extends State<MoviesGridView> {
 
   @override
   void initState() {
-    widget.endpoint == null
-        ? widget.bloc.getFavoriteMovies()
-        : widget.bloc.getMovies(widget.endpoint!);
+    widget.bloc.getMovies(widget.endpoint);
 
     super.initState();
   }
 
   @override
   void didUpdateWidget(covariant MoviesGridView oldWidget) {
-    widget.bloc.getMovies(widget.endpoint!);
+    widget.bloc.getMovies(widget.endpoint);
     super.didUpdateWidget(oldWidget);
   }
 
@@ -61,9 +59,7 @@ class _MoviesGridViewState extends State<MoviesGridView> {
       ),
       body: StreamBuilder<MovieState>(
         initialData: widget.bloc.initialData,
-        stream: widget.endpoint == null
-            ? widget.bloc.favoriteMovies
-            : widget.bloc.movies,
+        stream: widget.bloc.movies,
         builder: (
           BuildContext context,
           AsyncSnapshot<MovieState> snapshot,

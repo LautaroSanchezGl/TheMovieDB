@@ -91,7 +91,7 @@ class ApiService {
     }
   }
 
-  Future<DataState<List<MovieModel>>> getFavoriteMovies(
+  Future<DataState<List<MovieModel>>> getMoviesByIds(
       List<int> movieIds) async {
     List<MovieModel> favoriteMovies = [];
     try {
@@ -122,7 +122,7 @@ class ApiService {
         favoriteMovies,
       );
     } on Exception catch (e) {
-      rethrow;
+      return DataFailed(e.toString());
     }
   }
 }
