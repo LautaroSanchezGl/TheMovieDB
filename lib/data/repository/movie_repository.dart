@@ -40,10 +40,4 @@ class MovieRepositoryImp implements IMovieRepository {
         return apiService.getMoviesByIds(movieIds);
     }
   }
-
-  @override
-  Future<DataState<List<MovieModel>>> getMoviesByIds(
-      {required List<int> moviesId}) {
-    return apiService.getMoviesByIds(moviesId);
-  }
 }
