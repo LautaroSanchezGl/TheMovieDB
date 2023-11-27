@@ -1,36 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/util/constants/ui_constants.dart';
 import '../../core/util/enums/endpoint.dart';
-import '../bloc/movies_bloc.dart';
+
+import '../bloc/movies_controller.dart';
 import '../widget/custom_drawer.dart';
 import 'movie_list_view.dart';
 
-class NowPlayingMoviesView extends StatefulWidget {
+class NowPlayingMoviesView extends ConsumerWidget {
   const NowPlayingMoviesView({
     super.key,
-    required this.bloc,
   });
-  final MoviesBloc bloc;
 
   @override
-  State<NowPlayingMoviesView> createState() => _NowPlayingMoviesViewState();
-}
-
-class _NowPlayingMoviesViewState extends State<NowPlayingMoviesView> {
-  @override
-  void initState() {
-    widget.bloc.getMovies(Endpoint.nowPlaying);
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       backgroundColor: Colors.black12,
       appBar: AppBar(
@@ -40,10 +24,8 @@ class _NowPlayingMoviesViewState extends State<NowPlayingMoviesView> {
           ),
         ),
       ),
-      body: MovieListView(
-        bloc: widget.bloc,
-      ),
-      drawer: CustomDrawer(bloc: widget.bloc),
+      body: const MovieListView(),
+      drawer: const CustomDrawer(),
     );
   }
 }

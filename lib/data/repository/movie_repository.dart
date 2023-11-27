@@ -1,10 +1,12 @@
 import '../../core/util/constants/ui_constants.dart';
 import '../../core/util/enums/endpoint.dart';
 import '../../domain/repository/movie_repository_interface.dart';
-
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../datasource/remote/api_service.dart';
 import '../model/data_state.dart';
 import '../model/movie_model.dart';
+
+part 'movie_repository.g.dart';
 
 class MovieRepositoryImp implements IMovieRepository {
   final ApiService apiService;
@@ -40,4 +42,10 @@ class MovieRepositoryImp implements IMovieRepository {
         return apiService.getMoviesByIds(movieIds);
     }
   }
+}
+
+@riverpod
+MovieRepositoryImp movieRepositoryImp(MovieRepositoryImpRef ref){
+  var apiService = ref.watch(apiServiceProvider);
+  return MovieRepositoryImp(apiService: apiService);
 }

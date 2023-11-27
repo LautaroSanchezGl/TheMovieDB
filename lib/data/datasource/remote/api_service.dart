@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../core/util/constants/ui_constants.dart';
@@ -9,6 +9,8 @@ import '../../model/genre_model.dart';
 
 import '../../model/movie_model.dart';
 import '../../model/response_model.dart';
+
+part 'api_service.g.dart';
 
 class ApiService {
   static const String authToken =
@@ -126,3 +128,9 @@ class ApiService {
     }
   }
 }
+
+@riverpod
+ApiService apiService(ApiServiceRef ref){
+  return ApiService();
+}
+

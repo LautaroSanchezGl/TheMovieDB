@@ -1,69 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../core/util/enums/status.dart';
-import '../../domain/entity/genre_state.dart';
-import '../bloc/movie_genres_bloc.dart';
+import '../bloc/movie_genres_controller.dart';
 import 'row_genre_item.dart';
 
-class Genres extends StatefulWidget {
-  Genres({
+class Genres extends ConsumerWidget {
+  const Genres({
     super.key,
     required this.ids,
-    required this.movieGenresBloc,
   });
 
-  final MovieGenresBloc movieGenresBloc;
-  final List<num> ids;
+  final List<int> ids;
   static const noGenresFoundErrorMessage = 'No Genres for the Movie were Found';
 
   @override
-  State<Genres> createState() => _GenresState();
-}
-
-class _GenresState extends State<Genres> {
-  @override
-  void initState() {
-    super.initState();
-    widget.movieGenresBloc.getMovieGenres(widget.ids);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return StreamBuilder<GenreState>(
-      initialData: widget.movieGenresBloc.initialData,
-      stream: widget.movieGenresBloc.movieGenres,
-      builder: (
-        BuildContext context,
-        AsyncSnapshot<GenreState> snapshot,
-      ) {
-        switch (snapshot.data!.status) {
-          case Status.loading:
-            return const Center(
-              child: CircularProgressIndicator(
-                color: Colors.white,
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(movieGenresControllerProvider(ids));
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: state.when(
+        data: (genres) => genres
+            .map(
+              (genre) => RowGenreItem(
+                genre: genre.name,
               ),
-            );
-          case Status.success:
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: snapshot.data!.genres!
-                  .map(
-                    (genre) => RowGenreItem(
-                      genre: genre.name,
-                    ),
-                  )
-                  .toList(),
-            );
-          case Status.empty:
-            return const Text(
-              Genres.noGenresFoundErrorMessage,
-            );
-          case Status.failed:
-            return Text(
-              snapshot.data!.errorMsg!,
-            );
-        }
-      },
+            )
+            .toList(),
+        error: (error, stacktrace) => [Text('$error')],
+        loading: () => [
+          const Center(
+            child: CircularProgressIndicator(
+              color: Colors.white,
+            ),
+          )
+        ],
+      ),
     );
   }
 }
